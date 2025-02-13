@@ -1,0 +1,73 @@
+﻿
+Bir bankamatik sistemini simüle eden bir program tasarlamanız beklenmektedir. Program, başlangıçta 250 TL bakiyeye sahip bir kullanıcı hesabı üzerinden işlem yapacaktır. Bu sistemde kullanıcı hem kartlı hem de kartsız işlem gerçekleştirebilir.
+
+### Detaylı Talimatlar:
+
+#### 1. Kartlı İşlem
+- Kullanıcıdan bir şifre girmesi istenecek. Doğru şifre: **ab18**  
+- Şifre yanlış girilirse, kullanıcıya toplam **3 hak** tanınacak. Eğer 3 hakkı da yanlış kullanırsa, sistemden atılacaktır.  
+- Şifre doğru girilirse, kullanıcı **Ana Menüye** yönlendirilir.  
+
+#### 2. Ana Menü İşlemleri  
+Ana menüde şu işlemler bulunmaktadır:  
+
+1. **Para Çekme:**  
+   - Kullanıcı çekmek istediği tutarı girer.  
+   - Eğer çekmek istediği tutar mevcut bakiyeden düşük ya da eşit ise işlem başarılıdır.  
+   - Aksi halde, "Yetersiz Bakiye" uyarısı verilir.  
+
+   **Seçenekler:**  
+   - **9:** Ana menüye dön.  
+   - **0:** Çıkış yap.  
+
+2. **Para Yatırma:**  
+   Kullanıcı aşağıdaki işlemlerden birini seçebilir:  
+   - **Kredi Kartına Yatırma:**  
+     Kullanıcıdan en az **12 haneli bir kart numarası** girilmesi istenir. Eğer bakiye yeterliyse, tutar hesaptan kredi kartına yatırılır.  
+   - **Kendi Hesabına Yatırma:**  
+     Kullanıcıdan yatırmak istediği tutar alınır ve mevcut bakiyeye eklenir.  
+
+   **Seçenekler:**  
+   - **9:** Ana menüye dön.  
+   - **0:** Çıkış yap.  
+
+3. **Para Transferleri:**  
+   - **Başka Hesaba EFT:**  
+     Kullanıcıdan **TR** ile başlayan ve toplamda **14 karakterden oluşan bir IBAN numarası** girilmesi istenir. IBAN doğru ise ve bakiye uygunsa işlem gerçekleştirilir.  
+   - **Başka Hesaba Havale:**  
+     Kullanıcıdan **11 haneli hesap numarası** istenir. Hesap numarası doğruysa ve bakiye yeterliyse işlem başarılıdır.  
+
+   **Seçenekler:**  
+   - **9:** Ana menüye dön.  
+   - **0:** Çıkış yap.  
+
+4. **Eğitim Ödemeleri:**  
+   Bu seçenekte "Eğitim Ödemeleri sayfası arızalı." uyarısı verilir.  
+
+   **Seçenekler:**  
+   - **9:** Ana menüye dön.  
+   - **0:** Çıkış yap.  
+
+5. **Fatura Ödemeleri:**  
+   Kullanıcı aşağıdaki seçeneklerden birini seçebilir:  
+   - **1:** Elektrik Faturası  
+   - **2:** Telefon Faturası  
+   - **3:** İnternet Faturası  
+   - **4:** Su Faturası  
+   - **5:** OGS Ödemeleri  
+
+   Kullanıcıdan fatura tutarı istenir. Eğer bakiye yeterliyse ödeme yapılır. Aksi durumda "Yetersiz Bakiye" mesajı görüntülenir.  
+
+   **Seçenekler:**  
+   - **9:** Ana menüye dön.  
+   - **0:** Çıkış yap.  
+
+6. **Bilgi Güncelleme:**  
+   Kullanıcı şifresini değiştirebilir. Kullanıcıdan yeni şifre istenir ve güncelleme işlemi yapılır.  
+
+   **Seçenekler:**  
+   - **9:** Ana menüye dön.  
+   - **0:** Çıkış yap.  
+
+#### 3. Kartsız İşlem  
+Kartsız işlem seçenekleri burada detaylandırılmamıştır ancak kullanıcı, kartlı işlemlerde olduğu gibi benzer bir menü üzerinden işlem gerçekleştirebilir.
