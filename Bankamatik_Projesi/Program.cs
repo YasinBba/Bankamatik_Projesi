@@ -5,6 +5,7 @@ namespace Bankamatik_Projesi
     internal class Program
     {
         static int bakiye = 250;
+        static string sifre = "ab18";
 
         static void Main(string[] args)
         {
@@ -52,9 +53,9 @@ namespace Bankamatik_Projesi
             {
 
 
-                Console.WriteLine(3 - hak + 1 + ". Hakkınız için Şifrenizi Giriniz )");
-                string sifre = Console.ReadLine();
-                if (sifre == "ab18")
+                Console.WriteLine("Lütfen Şifrenizi Giriniz\nKalan Giriş Hakkınız   "+hak);
+                string girilensifre = Console.ReadLine();
+                if (girilensifre==sifre)
                 {
                     Console.WriteLine(" Ana Menüye Yönlendiriliyorsunuz...");
                     AnaMenu();
@@ -91,18 +92,26 @@ namespace Bankamatik_Projesi
             else if (secim == "3")
             {
                 Console.WriteLine("Para Transferleri Menüsüne Hoşgeldiniz");
+                ParaTransfer();
+                    return;
             }
             else if (secim == "4")
             {
                 Console.WriteLine("Eğitim Ödemeleri Menüsüne Hoşgeldiniz");
+                EğitimÖdeme();
+                return;
             }
             else if (secim == "5")
             {
                 Console.WriteLine("Fatura Ödemeleri Menüsüne Hoşgeldiniz");
+                FaturaÖdeme();
+                return;
             }
             else if (secim == "6")
             {
                 Console.WriteLine("Bilgi Güncelleme Menüsüne Hoşgeldiniz");
+                BilgiGüncelle();
+                return;
             }
             else
             {
@@ -169,7 +178,8 @@ namespace Bankamatik_Projesi
                     if (kkmiktar <= bakiye)
                     {
                         Console.WriteLine("Yatırma İşleminiz Gerçekleşmiştir");
-                        bakiye = bakiye - kkmiktar;
+                        AnaMenu() ;
+                        
                         Console.WriteLine("- **9:** Ana menüye dön. \r\n- **0:** Çıkış yap.  ");
                         if (Console.ReadLine() == "9")
                         {
@@ -199,13 +209,171 @@ namespace Bankamatik_Projesi
             {
                 Console.WriteLine("Hesabınıza Yatırmak İstediğiniz Tutarı Giriniz ");
                 int hesapyatırma = Convert.ToInt32(Console.ReadLine());
-                bakiye = bakiye + hesapyatırma;
-                Console.WriteLine("Hesabınıza" + hesapyatırma + "TL Yatırdınız");
+               
+                Console.WriteLine("Hesabınıza\t" + hesapyatırma + "TL Yatırdınız");
                 Console.WriteLine("- **9:** Ana menüye dön. \r\n- **0:** Çıkış yap.  ");
+                if (Console.ReadLine() == "9")
+                {
+                    Console.WriteLine("Ana Menüye Yönlendiriliyorsunuz");
+                    bakiye = bakiye + hesapyatırma;
+                    AnaMenu();
+                }
+                else if (Console.ReadLine() == "0")
+                {
+                    Console.WriteLine("Çıkış Yapılıyor");
+                }
 
             }
 
 
+        }
+        static void ParaTransfer()
+        {
+            Console.WriteLine("\nBaşka Bir Hesaba ETF Yapmak İçin 1'\nBaşka Hesaba Havale Yapmak İçin Lütfen 2'yi Tuşlayınız\nBakiyeniz:"+bakiye);
+            int secim=Convert.ToInt32(Console.ReadLine());
+            if (secim==1)
+            {
+                Console.WriteLine("Lütfen 'TR'ile Başlayan 14 Karakterli İban Numarası Giriniz");
+                string ibannumara = Console.ReadLine();
+                if(ibannumara.StartsWith("TR")&& ibannumara.Length==16)
+                {
+                    Console.WriteLine("Yatırmak İstediğiniz Tutarı Giriniz");
+                    int ibanmiktar = Convert.ToInt32(Console.ReadLine());
+                    if (ibanmiktar<=bakiye)
+                    {
+                        Console.WriteLine("Yatırma İşleminiz Gerçekleşmiştir");
+                        bakiye= bakiye - ibanmiktar;
+                        AnaMenu();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Bakiyeniz Yetersiz");
+                        Console.WriteLine("- **9:** Ana menüye dön. \r\n- **0:** Çıkış yap.  ");
+                        if (Console.ReadLine() == "9")
+                        {
+                            Console.WriteLine("Ana Menüye Yönlendiriliyorsunuz");
+                            
+                            AnaMenu();
+                        }
+                        else if (Console.ReadLine() == "0")
+                        {
+                            Console.WriteLine("Çıkış Yapılıyor");
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Lütfen Doğru İban Numarası Giriniz!");
+                    ParaTransfer();
+                }
+            }
+            else if (secim==2)
+            {
+                Console.WriteLine("Lütfen 11 Haneli Hesap Numarasını Giriniz");
+                string hesapnumara = Console.ReadLine();
+                if (hesapnumara.Length==11)
+                {
+                    Console.WriteLine("Yatırmak İstediğiniz Tutarı Giriniz");
+                    int hesapmiktar=Convert.ToInt32(Console.ReadLine());
+                    if (hesapmiktar<=bakiye)
+                    {
+                        Console.WriteLine("Yatırma İşleminiz Gerçekleşmiştir");
+                        bakiye=bakiye - hesapmiktar;
+                        AnaMenu();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Bakiyeniz Yetersiz");
+                        Console.WriteLine("- **9:** Ana menüye dön. \r\n- **0:** Çıkış yap.  ");
+                        if (Console.ReadLine() == "9")
+                        {
+                            Console.WriteLine("Ana Menüye Yönlendiriliyorsunuz");
+
+                            AnaMenu();
+                        }
+                        else if (Console.ReadLine() == "0")
+                        {
+                            Console.WriteLine("Çıkış Yapılıyor");
+                        }
+
+                    }
+                            
+                }
+            }
+            else
+            {
+                Console.WriteLine("Lütfen Doğru Hesap Numarası Giriniz!");
+                ParaTransfer();
+            }
+        }
+        static void EğitimÖdeme()
+        {
+            Console.WriteLine("Eğitim Ödemeleri Sayfası Arızalıdır");
+            Console.WriteLine("- **9:** Ana menüye dön. \r\n- **0:** Çıkış yap.  ");
+            if (Console.ReadLine() == "9")
+            {
+                Console.WriteLine("Ana Menüye Yönlendiriliyorsunuz");
+
+                AnaMenu();
+            }
+            else if (Console.ReadLine() == "0")
+            {
+                Console.WriteLine("Çıkış Yapılıyor");
+            }
+        }
+        static void FaturaÖdeme()
+        {
+            Console.WriteLine("Lütfen Ödemek İstediğiniz Fatura Türünü Seçiniz\n1-Elektrik Faturası\n2-Telefon Faturası\n3-İnternet Faturası\n4-Su Faturası\n5-OGS Ödemeleri");
+            int faturasecim=Convert.ToInt32(Console.ReadLine());
+            if (faturasecim >=1 && faturasecim <=5) 
+            {
+                Console.WriteLine("Lütfen Fatura Tutarını Giriniz");
+                int faturatutar =Convert.ToInt32(Console.ReadLine());
+                if (faturatutar<=bakiye)
+                {
+                    Console.WriteLine("Faturanız Yatırılmıştır");
+                    bakiye = bakiye - faturatutar;
+                    AnaMenu();
+                }
+                else
+                {
+                    Console.WriteLine("Bakiyeniz Fatura Ödemeniz İçin Yetersiz");
+                    Console.WriteLine("- **9:** Ana menüye dön. \r\n- **0:** Çıkış yap.  ");
+                    if (Console.ReadLine() == "9")
+                    {
+                        Console.WriteLine("Ana Menüye Yönlendiriliyorsunuz");
+
+                        AnaMenu();
+                    }
+                    else if (Console.ReadLine() == "0")
+                    {
+                        Console.WriteLine("Çıkış Yapılıyor");
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Lütfen Ödemek İstediğiniz Fatura Türlerinden Birini Seçiniz");
+                FaturaÖdeme();
+            }
+        }
+        static void BilgiGüncelle()
+        {
+            Console.WriteLine("Bu Kısımdan Şifrenizi Güncelleyebilirsiniz\nLütfen Eski Şifrenizi Giriniz");
+            string girilenMevcutSifre = Console.ReadLine();
+            if (girilenMevcutSifre==sifre)
+            {
+                Console.WriteLine("Yeni Şifrenizi Giriniz");
+                string girilenYeniSifre = Console.ReadLine();
+                sifre = girilenYeniSifre;
+                Console.WriteLine("Şifreniz Başarıyla Değiştirildi");
+                AnaMenu();
+            }
+            else
+            {
+                Console.WriteLine("Lütfen Eski Şifrenizi Doğru Giriniz!");
+                BilgiGüncelle();
+            }
         }
 
 
